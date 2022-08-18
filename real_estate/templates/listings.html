@@ -1,5 +1,5 @@
 {% for listing in listings  %}
 
-    <p>{{listing.title}}</p>
+    <a href="/listings/{{ listing.id }}/"><p>{{listing.title}}</p></a>
 
 {% endfor %}
