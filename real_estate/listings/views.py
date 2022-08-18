@@ -1,5 +1,5 @@
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Listing
 from .forms import ListingForm
 
@@ -26,7 +26,38 @@ def listing_retrieve(request, pk):
 
 def listing_create(request):
     form = ListingForm()
+    if request.method == "POST":
+        form = ListingForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/listings/")
+
     context = {
         "form": form
     }
     return render(request, "listing_create.html", context)
+
+
+def listing_update(request, pk):
+    form = ListingForm()
+    listing = Listing.objects.get(id=pk)
+    form = ListingForm(instance=listing)
+    if request.method == "POST":
+        form = ListingForm(request.POST, instance=listing)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/listings/")
+
+
+
+    context = {
+        "form": form
+    }
+    return render(request, "listing_update.html", context)
+
+def listing_delete(request, pk):
+    listing = Listing.objects.get(id=pk)
+    listing.delete()
+    return redirect("/listings/")
