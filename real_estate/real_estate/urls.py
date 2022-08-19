@@ -15,5 +15,5 @@ urlpatterns = [
     path('listings/<pk>/', listing_retrieve),
     path('listings/<pk>/edit/', listing_update),
     path('listings/<pk>/delete/', listing_delete),
-    path('add-listing/', listing_create)
+    path('add-listing/', listing_create),
 ]

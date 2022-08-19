@@ -3,10 +3,6 @@ from django.shortcuts import render, redirect
 from .models import Listing
 from .forms import ListingForm
 
-# Create your views here.
-
-# CRUD - Create, retrieve, update, delete, list
-
 
 def listing_list(request):
     listings = Listing.objects.all()
